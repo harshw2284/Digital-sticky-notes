@@ -1,0 +1,149 @@
+:root {
+  --wall: #26323b;
+  --wall-light: #33424d;
+  --ink: #2b2620;
+  --paper: #f7f5f0;
+  --accent: #f2b84b;
+  --danger: #b3412f;
+  --yellow: #ffe66d;
+  --pink: #ffa9bb;
+  --blue: #a5dcff;
+  --mint: #b9f0cb;
+  --lilac: #d8c8ff;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  font-family: "Figtree", system-ui, sans-serif;
+  color: var(--paper);
+  background:
+    radial-gradient(circle at 20% 0%, var(--wall-light), transparent 55%),
+    var(--wall);
+}
+
+.top { text-align: center; padding: 2.5rem 1rem 1rem; }
+.top h1 {
+  margin: 0;
+  font-family: "Caveat", "Segoe Print", "Bradley Hand", cursive;
+  font-size: clamp(2.6rem, 6vw, 4rem);
+  letter-spacing: 0.01em;
+}
+.top p { margin: 0.25rem 0 0; opacity: 0.75; }
+
+main { max-width: 1100px; margin: 0 auto; padding: 1rem 1.25rem 4rem; }
+
+/* ---------- composer (the pad you write on) ---------- */
+.composer {
+  max-width: 460px;
+  margin: 1rem auto 3rem;
+  padding: 1.25rem 1.5rem 1.5rem;
+  background: var(--paper);
+  color: var(--ink);
+  border-radius: 2px 2px 6px 6px;
+  box-shadow: 0 1px 0 #fff inset, 0 14px 30px rgba(0, 0, 0, 0.35);
+  border-top: 10px solid var(--accent);
+}
+.composer label { display: block; font-weight: 600; margin: 0.6rem 0 0.25rem; }
+.composer input,
+.composer textarea {
+  width: 100%;
+  padding: 0.6rem 0.7rem;
+  font: inherit;
+  color: var(--ink);
+  background: #fff;
+  border: 1.5px solid #cfc8bb;
+  border-radius: 4px;
+  resize: vertical;
+}
+.composer input:focus-visible,
+.composer textarea:focus-visible,
+button:focus-visible {
+  outline: 3px solid #1f6feb;
+  outline-offset: 2px;
+}
+.message { min-height: 1.3em; margin: 0.6rem 0 0; font-size: 0.92rem; color: var(--danger); }
+.message.ok { color: #2f6b3f; }
+
+.actions { display: flex; gap: 0.6rem; margin-top: 0.4rem; }
+button {
+  font: inherit;
+  font-weight: 600;
+  padding: 0.55rem 1.1rem;
+  border: 0;
+  border-radius: 4px;
+  background: var(--ink);
+  color: var(--paper);
+  cursor: pointer;
+}
+button:hover { background: #443c31; }
+button.ghost { background: transparent; color: var(--ink); border: 1.5px solid #b7ae9d; }
+button.ghost:hover { background: #ece7dc; }
+button:disabled { opacity: 0.55; cursor: progress; }
+
+/* ---------- board of notes ---------- */
+.board {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 2rem 1.75rem;
+}
+
+.note {
+  position: relative;
+  min-height: 210px;
+  display: flex;
+  flex-direction: column;
+  padding: 1.6rem 1.2rem 0.9rem;
+  color: var(--ink);
+  border-radius: 2px 2px 2px 22px / 2px 2px 2px 22px;
+  box-shadow: 0 10px 18px rgba(0, 0, 0, 0.35);
+  transform: rotate(var(--tilt, 0deg));
+  transition: transform 0.15s ease;
+}
+.note:hover, .note.editing { transform: rotate(0deg) scale(1.02); }
+.note.editing { outline: 3px dashed #fff; outline-offset: 4px; }
+
+/* strip of tape holding the note to the wall */
+.note::before {
+  content: "";
+  position: absolute;
+  top: -12px; left: 50%;
+  width: 84px; height: 24px;
+  transform: translateX(-50%) rotate(-2deg);
+  background: rgba(255, 255, 255, 0.45);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+}
+
+.note.yellow { background: var(--yellow); }
+.note.pink   { background: var(--pink); }
+.note.blue   { background: var(--blue); }
+.note.mint   { background: var(--mint); }
+.note.lilac  { background: var(--lilac); }
+
+.note h2 {
+  margin: 0 0 0.4rem;
+  font-family: "Caveat", "Segoe Print", "Bradley Hand", cursive;
+  font-size: 1.9rem;
+  line-height: 1.05;
+  overflow-wrap: anywhere;
+}
+.note p.body { margin: 0; flex: 1; white-space: pre-wrap; overflow-wrap: anywhere; line-height: 1.45; }
+.note time { display: block; margin-top: 0.8rem; font-size: 0.78rem; opacity: 0.65; }
+
+.note-actions { display: flex; gap: 0.4rem; margin-top: 0.5rem; }
+.note-actions button {
+  padding: 0.3rem 0.7rem;
+  font-size: 0.85rem;
+  background: rgba(43, 38, 32, 0.12);
+  color: var(--ink);
+}
+.note-actions button:hover { background: rgba(43, 38, 32, 0.24); }
+.note-actions .delete { color: var(--danger); }
+
+.empty { text-align: center; opacity: 0.75; }
+
+@media (prefers-reduced-motion: reduce) {
+  .note { transition: none; }
+}

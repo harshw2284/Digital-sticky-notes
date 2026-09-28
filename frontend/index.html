@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Digital Sticky Notes</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@600;700&family=Figtree:wght@400;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header class="top">
+    <h1>Digital Sticky Notes</h1>
+    <p>Jot it down. Stick it up. Peel it off when it's done.</p>
+  </header>
+
+  <main>
+    <form id="note-form" class="composer" novalidate>
+      <label for="title">Title</label>
+      <input id="title" name="title" maxlength="100" placeholder="Buy milk" autocomplete="off" required />
+
+      <label for="content">Note</label>
+      <textarea id="content" name="content" maxlength="1000" rows="4" placeholder="Two liters, and something for tea." required></textarea>
+
+      <p id="message" class="message" role="status" aria-live="polite"></p>
+
+      <div class="actions">
+        <button type="submit" id="submit-btn">Add note</button>
+        <button type="button" id="cancel-btn" class="ghost" hidden>Cancel</button>
+      </div>
+    </form>
+
+    <section id="board" class="board" aria-label="Your notes"></section>
+    <p id="empty" class="empty" hidden>No notes yet. Write your first one on the pad above.</p>
+  </main>
+
+  <script src="app.js"></script>
+</body>
+</html>
