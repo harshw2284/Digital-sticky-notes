@@ -47,7 +47,7 @@ minikube image load sticky-notes-backend:1.0
 minikube image load sticky-notes-frontend:1.0
 
 # kind
-kind load docker-image sticky-notes-backend:1.0 sticky-notes-frontend:1.0
+kind load docker-image sticky-notes-backend:1.0 sticky-notes-frontend:1.0 --name <cluster-name>
 
 # Docker Desktop Kubernetes: nothing to do, it shares your local images
 ```
